@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import ActorGrid from '../components/actor/ActorGrid';
 import MainPageLayout from '../components/MainPageLayout';
-import ShowGrid from '../components/show/ShowGrid';
 import { apiGet } from '../misc/config';
+import ShowGrid from '../components/show/ShowGrid';
+import ActorGrid from '../components/actor/ActorGrid';
 
 const Home = () => {
   const [input, setInput] = useState('');
   const [results, setResults] = useState(null);
   const [searchOption, setSearchOption] = useState('shows');
 
-  const isShowSearch = searchOption === 'shows';
-
+  const isShowsSearch = searchOption === 'shows';
   const onSearch = () => {
     apiGet(`/search/${searchOption}?q=${input}`).then(result => {
       setResults(result);
@@ -43,40 +42,44 @@ const Home = () => {
         <ActorGrid data={results} />
       );
     }
+
     return null;
   };
 
   return (
     <MainPageLayout>
       <input
-        placeholder="Searching For Something"
         type="text"
+        placeholder="Search for something"
         onChange={onInputChange}
         onKeyDown={onKeyDown}
         value={input}
       />
+
       <div>
         <label htmlFor="shows-search">
           Shows
           <input
             id="shows-search"
             type="radio"
-            checked={isShowSearch}
             value="shows"
+            checked={isShowsSearch}
             onChange={onRadioChange}
           />
         </label>
-        <label htmlFor="actor-search">
+
+        <label htmlFor="actors-search">
           Actors
           <input
             id="actors-search"
             type="radio"
-            checked={!isShowSearch}
             value="people"
+            checked={!isShowsSearch}
             onChange={onRadioChange}
           />
         </label>
       </div>
+
       <button type="button" onClick={onSearch}>
         Search
       </button>
