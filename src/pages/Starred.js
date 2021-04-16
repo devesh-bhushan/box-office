@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MainPageLayout from '../components/MainPageLayout';
 import { useShows } from '../misc/custom-hooks';
 import { apiGet } from '../misc/config';
@@ -30,11 +29,12 @@ const Starred = () => {
       setIsLoading(false);
     }
   }, [starred]);
+
   return (
     <MainPageLayout>
-      {isLoading && <div>Shows are Still Loading</div>}
-      {error && <div>Error Occured : {error}</div>}
-      {!isLoading && !shows && <div>No Shows were added</div>}
+      {isLoading && <div>Shows are still loading</div>}
+      {error && <div>Error occured: {error}</div>}
+      {!isLoading && !shows && <div>No shows were added</div>}
       {!isLoading && !error && shows && <ShowGrid data={shows} />}
     </MainPageLayout>
   );

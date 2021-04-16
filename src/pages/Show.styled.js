@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-// pages/Show.styled.js
 export const ShowPageWrapper = styled.div`
   padding: 0 20px;
 
